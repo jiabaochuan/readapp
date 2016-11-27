@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习题</title>
+</head>
+<body>
+<script>
+    function destroyer(arr) {
+        // Remove all the values
+        var arr_new=[];//创建一个新数组
+        var len=arguments.length;//传入参数的长度
+        for(var i=1;i<len;i++){
+            arr_new.push(arguments[i]);
+        }
+        var arr=arr.filter(function(element){
+            return arr_new.indexOf(element)<0;
+        });
+       return arr
+    }
+
+    destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+
+//Caesars Cipher
+    function rot13(str) { // LBH QVQ VG!
+        var arr=str.split(" ");
+        var arr_new=[];
+        var str_new="";
+        for(var i=0;i<arr.length;i++){
+            var len=arr[i].length;
+            for(var j=0;j<len;j++){
+                var num=arr[i].charCodeAt(j);
+                if(num>77&num<=90){
+                    str_new+=String.fromCharCode(num-13);
+                }else if(num<=77&num>=65){
+                    str_new+=String.fromCharCode(num+13);
+                }else{
+                    str_new+=String.fromCharCode(num);
+                }
+            }
+            arr_new.push(str_new);
+            str_new="";
+        }
+        return arr_new.join(" ");
+    }
+    // Change the inputs below to test
+    rot13("THE QUICK BROWN DOG JUMPED OVER THE LAZY FOX.");
+
+
+
+   function arr(){
+       for(var i=1;i<6;i++){
+           $("#bg-"+i).on("click",function(){
+               RootContainer.css("background-color",colors[i-1]);
+           });
+       }
+   }
+
+
+</script>
+</body>
+</html>
