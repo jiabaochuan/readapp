@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="a"></div>
+<script>
+    function formatterDateTime() {
+        var date=new Date();
+        var month=date.getMonth() + 1;
+        var datetime = date.getFullYear()
+                + ""// "年"
+                + (month >= 10 ? month : "0"+ month)
+                + ""// "月"
+                + (date.getDate() < 10 ? "0" + date.getDate() : date
+                        .getDate())
+                + ""
+                + (date.getHours() < 10 ? "0" + date.getHours() : date
+                        .getHours())
+                + ""
+                + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
+                        .getMinutes())
+                + ""
+                + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
+                        .getSeconds());
+        return datetime;
+    }
+
+    $.ajax({
+        type: 'post',
+        url: 'https://route.showapi.com/211-1?bookId=124227',
+        dataType: 'jsonp',
+        data: {
+            "showapi_timestamp": formatterDateTime(),
+            "showapi_appid": '29009', //这里需要改成自己的appid
+            "showapi_sign": 'a61208b1d5544a7da60a6033dd84fe11'  //这里需要改成自己的应用的密钥secret，
+
+        },
+        jsonp: 'jsonpcallback', //这个方法名很重要,不能改变
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
+            alert("操作失败!");
+        },
+        success: function(result) {
+            console.log(result) ;//console变量在ie低版本下不能用
+            alert(result.showapi_res_code)
+        }
+    });
+</script>
+</body>
+</html>

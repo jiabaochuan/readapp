@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>练习题</title>
+    <style>
+        body{
+            width: 375px;
+            height: 667px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
+<div style="background-color: #9c9c9c;width: 375px;
+            height: 600px;
+            margin: 0 auto;">
+
+</div>
 <script>
     function destroyer(arr) {
         // Remove all the values
@@ -58,6 +70,171 @@
    }
 
 
+    //rom罗马
+    function convert(num) {
+        var romanNum = [["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" ],[ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" ],[ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" ],[ "", "M", "MM", "MMM", "", "", "", "", "", "", "" ]];
+        var num1=num;
+        var i=0;
+        var arr=[];
+        while(num){
+            i ++;//得到是几位数
+            num = parseInt(num / 10);
+        }
+
+        var j=0;
+        while(num1&&j<i){
+            arr.push(romanNum[j][num1%10]);
+            num1=parseInt(num1/10);
+            j++
+        }
+        return arr.reverse().join("");
+    }
+
+    convert(36);
+
+    function convert1(num) {
+        var romanNum = [["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" ],[ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" ],[ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" ],[ "", "M", "MM", "MMM", "", "", "", "", "", "", "" ]];
+        var num1=parseInt(num);
+        console.log(num1);
+        var arr=num1.toString();//转换为字符串
+        var arr1=arr.split("");//转化为数组
+        var len=arr1.length;
+        var arr_new=[];
+        for(var i=0;i<len;i++){
+            arr_new.push(romanNum[i][(arr1[len-1-i])]);
+        }
+        return arr_new.reverse().join("");
+    }
+
+    convert1(036);
+
+
+    //
+
+    function where(collection, source) {
+        var arr = [];
+        var len=collection.length;
+        for(var key in source){
+            var s_key=key;
+            var s_value=source[s_key]
+        }
+        for(var i=0;i<len;i++){
+            for(var key in collection[i]) {
+                if(s_key=key&&s_value==collection[i][key]){
+                    arr.push(collection[i])
+                }
+            }
+        }
+        return arr;
+    }
+
+    where([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+
+   //........
+    function myReplace(str, before, after) {
+        if(/[A-Z]/.test(before)){
+            var after=after.replace(/(\w)/,function(v){return v.toUpperCase()});
+        }
+        return str.replace(before,after);
+    }
+
+    myReplace("A quick brown fox Jumped over the lazy dog", "Jumped", "leaped");
+
+    //切换元音字母的位置
+    function translate(str) {
+        var arr=["a","e","i","o","u"];
+        var arr_new1=[];
+        var arr_new=str.split("");
+        if(arr.indexOf(str.substr(0,1))!==-1){//首个单词为元音
+            arr_new.push("way");
+            str=arr_new.join("");
+            return str;
+        }
+
+        for(var i=1;i<str.length;i++){//找到第一个元音所在的位置
+            if(arr.indexOf(str[i])!=-1){
+                var num=i;
+                arr_new1.push(str.substr(num));
+                arr_new1.push(arr_new.slice(0,num).join(""));
+                arr_new1.push("ay");
+                return arr_new1.join("");
+            }
+        }
+    }
+
+    translate("glove");
+
+
+    //DNA
+    function pair(str) {//简单方法
+        var arr=str.split("");
+        var arr_new=[];
+        for(var i=0;i<arr.length;i++){
+            if(arr[i]=="C"){
+                arr_new.push(["C","G"]);
+            }else if(arr[i]=="G"){
+                arr_new.push(["G","C"]);
+            }else if(arr[i]=="A"){
+                arr_new.push(["A","T"]);
+            }else if(arr[i]=="T"){
+                arr_new.push(["T","A"]);
+            }
+        }
+        return arr_new;
+    }
+
+
+    function pair1(str) {//有技巧的方法
+        var cgat={
+            "C":"G",
+            "G":"C",
+            "A":"T",
+            "T":"A"
+        };
+        var arr_new=[];
+        var arr=str.split("");
+        arr.map(function(a){
+                arr_new.push([a,cgat[a]]);
+            });
+
+        return arr_new;
+    }
+
+    pair1("GCG");
+
+    function fn(fn3){
+        var fn3=function fn3(){
+
+        };
+        var fn3=3;
+        console.log(fn3);
+    }
+    fn(10);
+    var arr=[];
+    for(var i=0;i<10;i++){
+        arr[i]= (function(){
+            return i;})(i)
+    }
+    console.log(arr[0]  );
+
+
+    var name="信息";
+    var obj1={
+        name:"研发",
+        obj2:{
+         name:"小组",
+            obj3:{
+                name:"个人",
+                sayName:function(){
+                    return this.name;
+                }
+            }
+    }
+    };
+    console.log(obj1.obj2.obj3.sayName());
+    var obj=obj1.obj2.obj3.sayName;
+    console.log(obj());
 </script>
 </body>
 </html>
